@@ -1,0 +1,29 @@
+from twilio.rest import Client
+
+#account_sid = ''
+account_sid = 'AC118379df8b7b7c6e3626019f3f3093bd'
+
+#auth_token = ''
+auth_token = '2076a2d4f6c553ada439b9ab966cf624'
+
+class User:
+  def __init__(self, Name, PhoneNumber, AreaOfInterest):  
+    self.Name = Name
+    self.PhoneNumber = PhoneNumber
+    self.AreaOfInterest = AreaOfInterest
+    
+user1 = User( "John", '+19723227678', 'CLOUD')
+#user2 = User("", "", "")
+
+# if field is equal to %s then send message
+# list of links / strings
+# Security, IoT, AI, Data, Cloud, Blockchain
+
+client = Client(account_sid, auth_token)
+
+message = client.api.account.messages.create(
+                to = user1.PhoneNumber,
+                from_='+12029315873',
+                body = '%s is interested in %s'% (user1.Name, user1.AreaOfInterest)
+
+)
